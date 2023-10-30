@@ -1,0 +1,92 @@
+﻿@model SUBSURF_MKN_WellOptimization_MVC.Models.Wellopt
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+@{
+
+    if (@ViewBag.role == "Contributor")
+    {
+
+        @section uploadLink{ 
+            <li>@Html.ActionLink("Upload", "Index", "Upload") </li>
+            <li>@Html.ActionLink("Logs", "Index", "ActionLogs")</li>
+            }
+
+
+
+
+
+    }
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Wellopt</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RecordDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecordDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UWI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UWI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WellName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WellName)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PumpType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PumpType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OPTIMIZATIONTYPES)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OPTIMIZATIONTYPES)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

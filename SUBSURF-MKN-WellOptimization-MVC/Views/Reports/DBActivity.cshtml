@@ -1,0 +1,118 @@
+﻿
+@model SUBSURF_MKN_WellOptimization_MVC.Models.DBActivity
+
+@{
+    ViewBag.Title = "DBActivity";
+}
+
+@{
+
+    if (@ViewBag.role == "Contributor")
+    {
+
+        @section uploadLink{  
+            <li>@Html.ActionLink("Upload", "Index", "Upload") </li>
+            <li>@Html.ActionLink("Logs", "Index", "ActionLogs")</li>
+}
+
+
+
+
+
+    }
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>DBActivity</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.startDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.startDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.startDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.endDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.endDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.endDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<hr />
+
+@{
+
+    if (@ViewBag.isPost)
+    {
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <body>
+
+            <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+            <script>
+        var xValues = "@ViewBag.labels".split(",");
+        var yValues = [@ViewBag.nums];
+        var barColors =  "#2d8a6c";
+
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "Database activity for the past @ViewBag.DatesRange"
+                },
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'number of records entered'
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date'
+                        }
+                    }]
+                }
+
+
+
+
+            }
+        });
+            </script>
+
+        </body>
+
+    }
+}
+
+
+
+

@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "User Guide";
+}
+
+@{
+
+    if (@ViewBag.role == "Contributor")
+    {
+
+        @section uploadLink{  
+            
+            <li>@Html.ActionLink("Upload", "Index", "Upload") </li>
+            <li>@Html.ActionLink("Logs", "Index", "ActionLogs")</li>
+            }
+
+
+
+
+
+    }
+}
+<style>
+
+    * {
+        font-size:14px;
+    }
+</style>
+
+<h2>User Guide</h2>
+
+<div>
+
+    <dl>
+        <dt>Add a single record :</dt>
+        <dd>
+            From home page / Create New Record.
+        </dd>
+       <dd><img src="~/Content/create new.png" alt="Not found" /></dd> 
+    </dl>
+    <hr />
+    <dl>
+        <dt>Add multiple records :</dt>
+        <dd>From upload page in the nivigation bar.</dd>
+        <dd><img width="200" height="100" src="~/Content/upload.png" alt="Not found" /></dd>
+    </dl>
+    <hr />
+    <ol>
+        <li>Access from upload page in the nivigation bar</li>
+        <li>Choose date ,type of optimization and upload the excel file.</li>
+        <li>
+            make sure to match the following columns with headers
+            ,note that first row is for headers and will be ignored:
+        </li>
+
+        <ul>
+            <li> A ==> WELL Name</li>
+            <li> B ==> Pump Type</li>
+            <li> C ==> Comments</li>
+
+        </ul>
+     
+        <a href="~/Content/Records template.xlsx" download>Click to download template.</a>
+
+
+        <dd><img src="~/Content/excelFile.png" /></dd>
+        <li>Click View to see the uploaded records ,make sure the order and the values are correct.</li>
+        <dd><img width="800" height="400" src="~/Content/View.png" alt="Not found" /></dd>
+        <li>After viewing click Upload to database and make sure it was uploaded successfully.</li>
+        <dd><img src="~/Content/errorSimi.png" /></dd>
+        <li>Correct the name and upload in this example :</li>
+        <dd><img src="~/Content/success.png" /></dd>
+
+    </ol>
+    <hr />
+    <dl>
+        <dt>Notes Regarding Record Adition : </dt>
+        <dd>The UWI will follow the well name by defualt.</dd>
+        <dd>If the well name is incorrect then an error message will apear with recommendation for similar names. </dd>
+        <dd><img src="~/Content/errorSimi.png"/></dd>
+    </dl>
+    <hr />
+    <dl>
+        <dt>Delete a record :</dt>
+        <ol>
+            <li>
+                From the home page click on Delete for the specified record.
+            </li>
+            <dd><img src="~/Content/edit.png"/></dd>
+            <li>You will be redirected to Deletion confirmiation click delete to confirm.</li>
+            <dd><img width="350" height="220" src="~/Content/delete.png"/></dd>
+        </ol>
+    </dl>
+    <hr />
+    <dl>
+        <dt>Edit a record :</dt>
+
+        <ol>
+            <li>
+                From the home page click on Edit for the specified record.
+            </li>
+            <dd><img src="~/Content/edit.png"/></dd>
+            <li>You will be redirected to Edit page apply the changes and click save.</li>
+            <dd><img width="300" height="200" src="~/Content/editPage.png" /></dd>
+        </ol>
+    </dl>
+
+
+
+
+
+
+
+
+</div>

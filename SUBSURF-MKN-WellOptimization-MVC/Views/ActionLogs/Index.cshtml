@@ -1,0 +1,67 @@
+﻿@model IEnumerable<SUBSURF_MKN_WellOptimization_MVC.Models.ActionLog>
+
+@{
+    ViewBag.Title = "Logs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    ViewBag.Title = "MKN Well OPT";
+
+    <!--you will need to add this in every view-->
+    if (@ViewBag.role == "Contributor")
+    {
+
+        @section uploadLink{
+            <li>@Html.ActionLink("Upload", "Index", "Upload") </li>
+            <li>@Html.ActionLink("Logs", "Index", "ActionLogs")</li>
+        }
+
+    }
+}
+<style>
+
+    .table-hover {
+        line-height: normal;
+        font-size: 1.5rem;
+        background-color: #EEEEEE;
+    }
+</style>
+
+<h2>Logs</h2>
+
+<!--if this is add  HH:mm  tt to the date , date search will not work-->
+<div>
+
+    @(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.Id).Titled("ID").Sortable(true);
+        columns.Add(model => model.LogDate.Date).Titled("Log Date").Filterable(GridFilterType.Double).Formatted("{0:dd-MMM-yy}").Sortable(true);
+        columns.Add(model => model.UWI).Titled("UWI");
+        columns.Add(model => model.Username).Titled("User name");
+        columns.Add(model => model.actionType).Titled("Action Type");
+
+        columns.Add().RenderedAs(model => Html.ActionLink("Details", "Details", new
+        {
+            id = model.Id
+
+        }));
+
+    })
+    .UsingFilterMode(GridFilterMode.Header)
+    .Empty("No data found")
+    .Filterable()
+
+    .Pageable(pager =>
+    {
+        pager.PagesToDisplay = 10;
+        pager.RowsPerPage = 20;
+    })
+    .Css("css-classes")
+    .AppendCss("table-hover")
+
+    )
+</div>

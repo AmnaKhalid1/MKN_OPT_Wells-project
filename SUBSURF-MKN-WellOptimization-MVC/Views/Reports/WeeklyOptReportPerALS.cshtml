@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "WeeklyOptReportPerALS";
+
+
+    if (@ViewBag.role == "Contributor")
+    {
+
+        @section uploadLink{
+            <li>@Html.ActionLink("Upload", "Index", "Upload") </li>
+            <li>@Html.ActionLink("Logs", "Index", "ActionLogs")</li>
+        }
+
+
+
+
+
+    }
+}
+<style>
+    #container {
+        position: absolute;
+        top: 9%;
+        right: 9%;
+    }
+</style>
+
+<script>
+    function IncreaseSize() {
+        var current = document.getElementById("reportID").offsetWidth;
+        document.getElementById("reportID").style.width = current + 50 + "px";
+
+        var current2 = document.getElementById("reportID").offsetHeight;
+        document.getElementById("reportID").style.height = current2 + 50 + "px";
+
+
+    }
+
+    function DescreasSize() {
+        var current = document.getElementById("reportID").offsetWidth;
+        document.getElementById("reportID").style.width = current - 50 + "px";
+
+        var current2 = document.getElementById("reportID").offsetHeight;
+        document.getElementById("reportID").style.height = current2 - 50 + "px";
+    }
+
+
+
+</script>
+
+<h2>Optimization Reports</h2>
+<hr />
+<span id="container">
+    
+    <button type="button" id="myBtn1" onclick="IncreaseSize()" style="margin-right:10px"><strong>+</strong></button>
+   
+    <button type="button" id="myBtn2" onclick="DescreasSize()"><strong>-</strong></button>
+
+</span>
+
+
+<iframe id="reportID" width="1250" height="650" title="WellOptReport" src="https://app.powerbi.com/reportEmbed?reportId=3fa28839-144b-4336-b36b-58bb9fac7c70&autoAuth=true&ctid=24df34ab-a358-4b62-ba14-e5dfb43b9d63"  frameborder="0" allowFullScreen="true"></iframe>
+

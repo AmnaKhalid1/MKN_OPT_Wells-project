@@ -1,0 +1,104 @@
+﻿@model SUBSURF_MKN_WellOptimization_MVC.Models.Wellopt
+
+@{
+    ViewBag.Title = "Details";
+}
+@{
+
+    if (@ViewBag.role == "Contributor")
+    {
+
+        @section uploadLink{
+            <li>@Html.ActionLink("Upload", "Index", "Upload") </li>
+            <li>@Html.ActionLink("Logs", "Index", "ActionLogs")</li>
+        }
+
+
+
+
+
+    }
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RecordDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecordDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UWI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UWI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WellName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WellName)
+        </dd>
+
+        <dt>Row </dt>
+        @{ if (@ViewBag.Row != null)
+            {
+
+                <dd>@ViewBag.Row </dd>
+
+            }
+
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PumpType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PumpType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OPTIMIZATIONTYPES)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OPTIMIZATIONTYPES)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+    </dl>
+</div>
+
+@{
+
+    if (@ViewBag.role == "Contributor")
+    {
+
+
+
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+
+
+}
+}
+<p>
+
+    | @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,55 @@
+﻿@model ExcelDemo.Models.OptimizationData
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<!--
+
+<form enctype="multipart/form-data" asp-action="Index" asp-controller="Home">
+    <input type="text" name="time"/>
+    <input type="file" name="file" />
+
+
+    <input type="submit" value="Upload"/>
+
+</form>
+
+-->
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <br />
+    <div class="form-group">
+        Date : <input type="date" asp-for="RecordDate" name="RecordDate" />
+
+        <span asp-validation-for="RecordDate" class="text-danger"></span>
+    </div>
+
+    <br />
+    <br />
+    <label>Filename:</label>
+    <input type="file" name="file" />
+
+    <br />
+    <br />
+    <div class="form-group">
+        Type : <select name="Optimization" asp-for="OPTIMIZATIONTYPES" >
+            <option value="Optimization"> Optimization</option>
+            <option value="De-optimization"> De-optimization</option>
+        </select>
+        <span asp-validation-for="OPTIMIZATIONTYPES" class="text-danger"></span>
+    </div>
+
+    <br />
+    <br />
+    <input type="submit" name="submit" value="Upload" />
+}
+<h2>@ViewBag.all</h2>
+<br /><br />
+<h2>@ViewBag.name</h2>

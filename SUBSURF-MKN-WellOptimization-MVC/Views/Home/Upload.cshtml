@@ -1,0 +1,85 @@
+﻿@model ExcelDemo.Models.OptimizationData
+<label>
+    Please use the tool below to upload your Well Optimization data
+</label>
+<br>
+<ol>
+    <li>
+        Brows to the excel template which contains the data
+    </li>
+
+    <li>
+        Click on 'Upload' and view your data
+    </li>
+
+    <li>
+        When satisfied send the data to the DB
+    </li>
+
+</ol>
+<hr />
+<form id ="formTest" asp-action="Upload" asp-controller="Home" enctype="multipart/form-data" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <br />
+    <div class="form-group">
+        Date : <input type="date" asp-for="RecordDate" name="RecordDate" />
+        <span asp-validation-for="RecordDate" class="text-danger"></span>
+    </div>
+
+    <br />
+    <br />
+    <div class="form-group">
+
+        File : <input type="file" asp-for="FormFile" name="file" id="file"/>
+        <span asp-validation-for="FormFile" class="text-danger"></span>
+    </div>
+
+    <br />
+    <br />
+    <div class="form-group">
+        Type : <select name="Optimization" asp-for="OPTIMIZATIONTYPES" name="optType">
+            <option value="Optimization"> Optimization</option>
+            <option value="De-optimization"> De-optimization</option>
+        </select>
+        <span asp-validation-for="OPTIMIZATIONTYPES" class="text-danger"></span>
+    </div>
+
+    <br />
+    <br />
+
+    <input type="submit" value="View" />
+</form>
+<script type="text/javascript">
+    var form = document.getElementById('formTest').onsubmit = function (e) {
+            e.preventDefault();
+        var formdata = new FormData(); //FormData object
+        var fileInput = document.getElementById('files');
+        if (fileInput != "" && fileInput.files.length > 0) {
+            //Iterating through each files selected in fileInput
+            for (i = 0; i < fileInput.files.length; i++) {
+                //Appending each file to FormData object
+                formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            }
+            //Creating an XMLHttpRequest and sending
+            var xhr = new XMLHttpRequest();
+
+            var url = '@Url.Action("Upload","Home")';
+            xhr.open('POST', url);
+            xhr.send(formdata);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var result = xhr.responseText;
+
+                }
+            }
+            return false;
+        }
+    }
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

@@ -1,0 +1,119 @@
+﻿
+@model SUBSURF_MKN_WellOptimization_MVC.Models.ActionLog
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "MKN Well OPT";
+
+    <!--you will need to add this in every view-->
+    if (@ViewBag.role == "Contributor")
+    {
+
+        @section uploadLink{
+            <li>@Html.ActionLink("Upload", "Index", "Upload") </li>
+            <li>@Html.ActionLink("Logs", "Index", "ActionLogs")</li>
+        }
+
+    }
+}
+
+
+<h2>Details</h2>
+
+<div>
+    <h4>Action Log Record</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LogDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LogDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecordId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecordId)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UWI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UWI)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.actionType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.actionType)
+        </dd>
+
+        <hr />
+
+        @{
+            if (@ViewBag.Previous != null)
+            {
+                <strong>
+                    Previous Record  Info:
+                </strong>
+                <br />
+
+
+            }
+            else if (@ViewBag.Created != null)
+            {
+
+                <strong>
+                    Created Record  Info:
+                </strong>
+                <br />
+            }
+            if (ViewBag.Created != null || ViewBag.Previous != null)
+            {
+
+                <dt>Well Name</dt>
+                <dd>@ViewBag.WellName</dd>
+
+                <dt>PumpType</dt>
+                <dd>@ViewBag.Pump</dd>
+
+                <dt>Comment</dt>
+                <dd>@ViewBag.comment</dd>
+
+                <dt>OTP Type </dt>
+                <dd>@ViewBag.optType</dd>
+
+               
+
+            }
+
+        }
+    </dl>
+</div>
+<p>
+   
+    @Html.ActionLink("Back to List", "Index")
+</p>

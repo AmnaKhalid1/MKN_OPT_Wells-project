@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "WellOptByArea";
+}
+
+
+@{
+
+    if (@ViewBag.role == "Contributor")
+    {
+
+        @section uploadLink{ 
+            <li>@Html.ActionLink("Upload", "Index", "Upload") </li>
+            <li>@Html.ActionLink("Logs", "Index", "ActionLogs")</li>
+            
+            }
+
+
+
+
+
+    }
+}
+<h2>WellOptByArea</h2>
+
+<iframe src="https://oman-reports.oxy.com/ReportServer/Pages/ReportViewer.aspx?%2FSubsurface%2FMukhaizna%2FWell_Opt_DB%2FWell_Opt_DB%2FOptimization%20Count%20by%20Area" title="WellOptByArea" style="width: 100%; height: 900px; background-color: #ccc;">
+</iframe>
+

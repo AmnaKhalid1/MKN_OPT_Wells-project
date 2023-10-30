@@ -1,0 +1,176 @@
+﻿@model SUBSURF_MKN_WellOptimization_MVC.Models.Wellopt
+
+
+@{
+    ViewBag.Title = "Upload";
+}
+
+
+@{
+
+    if (@ViewBag.role == "Contributor")
+    {
+
+        @section uploadLink{ 
+            <li>@Html.ActionLink("Upload", "Index", "Upload") </li>
+            <li>@Html.ActionLink("Logs", "Index", "ActionLogs")</li>
+            }
+
+
+
+
+
+    }
+}
+<h2>Upload</h2>
+<h4>Please use the tool below to upload your Well Optimization data</h4>
+<ol>
+    <li>Select a date</li>
+    <li>
+        make sure to match the following columns with headers
+        note that first row is for headers and will be ignored:
+        <ul>
+            <li> A ==> WELL Name</li>
+            <li> B ==> Pump Type</li>
+            <li> C ==> Comments</li>
+        </ul>
+
+        
+
+    </li>
+    <li>Brows to the excel template which contains the data</li>
+    <li>Click on 'View' and view your data</li>
+
+    <li>When satisfied send the data to the DB</li>
+
+</ol>
+
+@using (Html.BeginForm("Index", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.RecordDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.RecordDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.RecordDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <!--
+         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <br />
+    <div class="form-group">
+        Date : <input type="date" asp-for="RecordDate" name="RecordDate" />
+
+        <span asp-validation-for="RecordDate" class="text-danger"></span>
+    </div>
+
+        -->
+
+
+    <br />
+    <br />
+    <label>Filename:</label>
+    <input type="file" name="file" />
+
+    <br />
+    <br />
+    <!--
+         <div class="form-group">
+        Type : <select name="Optimization" asp-for="OPTIMIZATIONTYPES">
+            <option value="Optimization"> Optimization</option>
+            <option value="De-optimization"> De-optimization</option>
+        </select>
+        <span asp-validation-for="OPTIMIZATIONTYPES" class="text-danger"></span>
+    </div>
+
+        -->
+    <!--
+
+
+        -->
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.OPTIMIZATIONTYPES, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.OPTIMIZATIONTYPES, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.OPTIMIZATIONTYPES, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <br />
+    <input type="submit" name="submit" value="View" />
+}
+
+<br />
+<h2>@ViewBag.error</h2>
+
+<br />
+<hr />
+<table class="table table-striped">
+
+
+    @{
+
+        if (@ViewBag.records != null)
+        {
+            <h2>View Records </h2>
+            <tr>
+
+                <th>RecordDate</th>
+                <th>UWI</th>
+                <th>WellName </th>
+
+                <th>PumpType</th>
+                <th>OPTIMIZATIONTYPES</th>
+                <th>Comments</th>
+
+            </tr>
+            foreach (var well in @ViewBag.records)
+            {
+
+                <tr>
+
+                    <td>@well.RecordDate.ToString("yyyy-MM-dd")</td>
+                    <td>@well.UWI</td>
+                    <td>@well.WellName </td>
+
+                    <td>@well.PumpType</td>
+                    <td>@well.OPTIMIZATIONTYPES</td>
+                    <td>@well.Comments</td>
+
+                </tr>
+            }
+
+            using (Html.BeginForm("UploadToDatabase", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                <input type="submit" value="Upload to database" />
+            }
+
+        }
+
+        if (@ViewBag.WellNameCheck != null)
+        {
+            <div class="alert alert-danger">@Html.Raw(@ViewBag.WellNameCheck)</div>
+
+        }
+
+        if (@ViewBag.dbError != null)
+        {
+            <div class="alert alert-danger"><strong>Error :</strong>@ViewBag.dbError</div>
+
+        }
+
+        if (@ViewBag.success != null)
+        {
+            <div class="alert alert-success">
+                <strong>✓Success!</strong>@ViewBag.success </div>
+
+        }
+
+    }
+</table>
+

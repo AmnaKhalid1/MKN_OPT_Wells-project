@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "About";
+}
+
+@{
+    
+
+    
+    if (@ViewBag.role == "Contributor")
+    {
+
+        @section uploadLink{  
+            <li>@Html.ActionLink("Upload", "Index", "Upload") </li>
+            <li>@Html.ActionLink("Logs", "Index", "ActionLogs")</li>
+            
+            }
+
+
+
+
+
+    }
+}
+
+<h2>About this website</h2>
+<p><br /> This website was created by MKN Subsurface Technical team. It serves as an interface to manage the MKN Well Optimization records data. For technical support please contact:</p>
+
+<br />
